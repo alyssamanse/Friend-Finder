@@ -12,3 +12,28 @@
 	// the closest match will be the user with the least amount of difference
 	// once you've found the current user's most compatible friend, display the result as a modal pop up
 		// the modal should display both the name and picture of the closest match
+
+var express = require("express");
+var path = require("path");
+var friendList = require("../data/friends.js");
+var app = express();
+var router = express.Router();
+
+router.post("/api/friends", function(request, response) {
+	friendList.push(request.body);
+	response.json(friendList);
+
+	console.log("post request running in apiRoutes files");
+
+	for (var i = 0; i < friendList.length; i++) {
+		console.log(friendList[i].scores);
+	}
+});
+
+router.get("/api/friends", function(request, response) {
+	response.json(friendList);
+});
+
+module.exports = router;
+
+

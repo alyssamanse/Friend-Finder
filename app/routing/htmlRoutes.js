@@ -1,3 +1,13 @@
-// a GET route to /survey which should display the survey page
+var express = require("express");
+var path = require("path");
+var router = express.Router();
 
-// a default catch-all route that leads to home.html and displays the home page
+router.get("/", function(request, response) {
+	response.sendFile(path.join(__dirname, "../public/home.html"));
+});
+
+router.get("/survey", function(request, response) {
+	response.sendFile(path.join(__dirname, "../public/survey.html"));
+});
+
+module.exports = router;

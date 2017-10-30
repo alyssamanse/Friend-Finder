@@ -173,7 +173,7 @@ Submit button
 		<hr>
 	    <footer class="footer">
 	      <div class="container">
-		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
+		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/alyssamanse/friend-finder">GitHub Repo</a></p>
 	      </div>
 	    </footer>
 
@@ -191,7 +191,7 @@ Submit button
 	      </div>
 	      <div class="modal-body">
 	        <h2 id="matchName"></h2>
-	        <img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+	        <img id="matchImg" src="" alt="">
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -203,41 +203,30 @@ Submit button
 
   <script type="text/javascript">
 
+
     // Capture the form inputs 
-    $("#submit").on("click", function(){
+    $("#submit").on("click", function(event){
 
-    	// Form validation
-    	function validateForm() {
-		  var isValid = true;
-		  $('.form-control').each(function() {
-		    if ( $(this).val() === '' )
-		        isValid = false;
-		  });
+    	event.preventDefault();
 
-		  $('.chosen-select').each(function() {
+    	console.log("Form submitted!");
 
-		  	if( $(this).val() === "")
-		  		isValid = false
-		  })
-		  return isValid;
-		}
+    	var userData = {
+    		name: $("#name").val(),
+    		photo: $("#photo").val(),
+    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+    	}
 
-		// If all required fields are filled
-		if (validateForm() == true)
-		{
-			// Create an object for the user's data
-	    	var userData = {
-	    		name: $("#name").val(),
-	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
-	    	}
+    	console.log(userData);
 
-
-	    	// Grab the URL of the website
-	    	var currentURL = window.location.origin;
+		$.post("/api/friends", userData)
+    		.done(function(data) {
+    			console.log(data);
+    			console.log("post function running inside server.html");
+    		})
 
 	    	// AJAX post the data to the friends API. 
-	    	$.post(currentURL + "/api/friends", userData, function(data){
+	    	/* $.post(currentURL + "/api/friends", userData, function(data){
 
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
 	    		$("#matchName").text(data.name);
@@ -246,15 +235,9 @@ Submit button
 		    	// Show the modal with the best match 
 		    	$("#resultsModal").modal('toggle');
 
-	    	});
-		}
-		else
-		{
-			alert("Please fill out all fields before submitting!");
-		}
-    	
-    	return false;
-    });
+		    }); */
+	});
+
 
 
   </script>
