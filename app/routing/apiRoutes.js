@@ -15,20 +15,44 @@
 
 var express = require("express");
 var path = require("path");
+var bodyParser = require('body-parser');
 var friendList = require("../data/friends.js");
 var app = express();
 var router = express.Router();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 router.post("/api/friends", function(request, response) {
-	friendList.push(request.body);
-	response.json(friendList);
 
-	console.log("post request running in apiRoutes files");
+	var newFriend = request.body;
+	var matchDifference = 1000;
+	var match;
 
-	for (var i = 0; i < friendList.length; i++) {
-		console.log(friendList[i].scores);
+	for (var i = 0; i < newFriend.scores.length; i++) {
+		newFriend.scores[i] = parseInt(newFriend.scores[i]);
 	}
+
+	friendList.push(newFriend);
+
+
+	for (var i = 0; i < friendList.length -1; i++) {
+		totalDifference = 0;
+
+		for (var j = 0; j < newFriend.scores.length; j++) {
+			totalDifference += Math.abs(newFriend.scores[j] - friendList[i].scores[j])
+		}
+
+		if (totalDifference <= matchDifference) {
+			matchDifference = totalDifference;
+			match = friendList[i];
+		}
+	}
+
+	response.json(match);
+
 });
+
 
 router.get("/api/friends", function(request, response) {
 	response.json(friendList);

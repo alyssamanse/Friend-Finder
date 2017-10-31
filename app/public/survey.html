@@ -209,33 +209,38 @@ Submit button
 
     	event.preventDefault();
 
-    	console.log("Form submitted!");
-
     	var userData = {
     		name: $("#name").val(),
     		photo: $("#photo").val(),
     		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
     	}
 
-    	console.log(userData);
+		var currentURL = window.location.origin;
 
-		$.post("/api/friends", userData)
-    		.done(function(data) {
-    			console.log(data);
-    			console.log("post function running inside server.html");
-    		})
+    	// AJAX post the data to the friends API. 
+    	$.post(currentURL + "/api/friends", userData, function(data){
+    		console.log("post is running and here's the data");
+    		console.log(data);
 
-	    	// AJAX post the data to the friends API. 
-	    	/* $.post(currentURL + "/api/friends", userData, function(data){
+    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
+    		$("#matchName").text(data.name);
+    		$('#matchImg').attr("src", data.photo);
 
-	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
-	    		$("#matchName").text(data.name);
-	    		$('#matchImg').attr("src", data.photo);
+	    	// Show the modal with the best match 
+	    	$("#resultsModal").modal('toggle');
 
-		    	// Show the modal with the best match 
-		    	$("#resultsModal").modal('toggle');
+	    	$("#q1").val("");
+			$("#q2").val("")
+			$("#q3").val("");
+			$("#q4").val("");
+			$("#q5").val("");
+			$("#q6").val("");
+			$("#q7").val("");
+			$("#q8").val("");
+			$("#q9").val("");
+			$("#q10").val("");
 
-		    }); */
+	    });
 	});
 
 
