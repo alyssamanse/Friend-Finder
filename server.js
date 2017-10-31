@@ -26,7 +26,7 @@ app.use("/", htmlRoutes);
 
 app.use("/survey", htmlRoutes);
 
-// app.get("/api/friends", apiRoutes);
-
 app.post("/api/friends", apiRoutes);
+
+app.get("/api/friends", apiRoutes);
 
