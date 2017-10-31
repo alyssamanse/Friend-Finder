@@ -11,7 +11,7 @@ var friendList = [
 	}, 
 	{
 	name: "Walter Bishop", 
-	photo: "https://url.to.photo.jpg",
+	photo: "https://typeset-beta.imgix.net/rehost%2F2016%2F9%2F13%2F49261c53-6534-45e6-b05d-b848530afddc.jpg",
 	scores: [1,2,5,4,3,2,1,3,2,1]
 	}, 
 	{
