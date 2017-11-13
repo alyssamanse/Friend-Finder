@@ -1,7 +1,8 @@
 # Find A Friend Node Application
 
 ## Overview
-This Node.js application matches you with a compatible friend based on quiz results. Your potential friends may or may not be characters from TV show Fringe. See who you would hit it off with [here](This Node.js application matches you with a compatible friend based on quiz results. Your potential friends may or may not be characters from TV show Fringe.
+This Node.js application matches you with a compatible friend based on quiz results. Your potential friends may or may not be characters from TV show Fringe. 
+
 Complete the personality quiz and see who you match up in the multiverse [here](https://find-your-friend.herokuapp.com/).
 
 ## Setup
